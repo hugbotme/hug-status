@@ -103,11 +103,7 @@ func moveIfPossible(red redis.Conn, pr PullRequest) bool {
 func pullrequestStatus(config *config.Configuration) {
 	client := GitHubClient(config.Github.APIToken)
 
-	red, err := redis.Dial("tcp", ":6379")
-	if err != nil {
-		fmt.Println("error", err)
-		return
-	}
+	red := config.ConnectRedis()
 	defer red.Close()
 
 	for {
