@@ -75,12 +75,12 @@ func moveIfPossible(red redis.Conn, pr PullRequest) bool {
 
 	if pr.State == "merged" {
 		fmt.Println("PR is merged, will move")
-		red.Do("RPUSH", "hugbot:pullrequests:merged", data)
+		red.Do("RPUSH", "hug:pullrequests:merged", data)
 		return true
 	}
 	if pr.State == "closed" {
 		fmt.Println("PR is closed, will move")
-		red.Do("RPUSH", "hugbot:pullrequests:closed", data)
+		red.Do("RPUSH", "hug:pullrequests:closed", data)
 		return true
 	}
 
@@ -123,7 +123,7 @@ func main() {
 	for {
 		fmt.Println("Checking for things…")
 
-		values, err := redis.Values(red.Do("BLPOP", "hugbot:pullrequests", 0))
+		values, err := redis.Values(red.Do("BLPOP", "hug:pullrequests", 0))
 		if err != nil {
 			fmt.Println("Redis failed", err)
 			time.Sleep(waitTime * time.Second)
@@ -165,7 +165,7 @@ func main() {
 			continue
 		}
 
-		red.Do("RPUSH", "hugbot:pullrequests", data)
+		red.Do("RPUSH", "hug:pullrequests", data)
 		fmt.Println("going to sleep")
 		time.Sleep(waitTime * time.Second)
 	}
