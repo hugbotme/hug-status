@@ -257,11 +257,7 @@ func finishedRepos(config *config.Configuration) {
 	client := GitHubClient(config.Github.APIToken)
 	twitter_client := twitter.NewClient(config)
 
-	red, err := redis.Dial("tcp", ":6379")
-	if err != nil {
-		fmt.Println("error", err)
-		return
-	}
+	red := config.ConnectRedis()
 	defer red.Close()
 
 	fmt.Println("Waiting for finished repositories...")
