@@ -6,11 +6,19 @@ import (
 )
 
 type Configuration struct {
-	GitHub githubConfiguration `json:"github"`
+	Twitter twitterConfiguration `json:"twitter"`
+	Github  GithubConfiguration  `json:"github"`
 }
 
-type githubConfiguration struct {
+type twitterConfiguration struct {
+	ConsumerKey       string `json:"consumer-key"`
+	ConsumerSecret    string `json:"consumer-secret"`
+	AccessToken       string `json:"access-token"`
 	AccessTokenSecret string `json:"access-token-secret"`
+}
+
+type GithubConfiguration struct {
+	APIToken string `json:"api-token"`
 }
 
 func NewConfiguration(configFile *string) (*Configuration, error) {
