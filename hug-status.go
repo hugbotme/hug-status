@@ -217,7 +217,7 @@ const (
 )
 
 func (pr *PullRequest) FullUrl() string {
-	return fmt.Sprintf("http://github.com/%s/%s/pulls/%d",
+	return fmt.Sprintf("http://github.com/%s/%s/pull/%d",
 		pr.Owner,
 		pr.Repository,
 		pr.Id)
