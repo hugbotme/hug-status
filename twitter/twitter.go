@@ -37,7 +37,7 @@ func (client *Twitter) PostReply(msg string, id_str string) {
 		return
 	}
 	username := tweet.User.ScreenName
-	text := fmt.Sprintf("msg", username)
+	text := fmt.Sprintf(msg, username)
 
 	fmt.Println("posting tweet:", text)
 
